@@ -11,8 +11,8 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Table(name = "NMS.CPU")
-public class SystemInfoEntity {
+@Table(name = "nms_cpu")
+public class NmsCpu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CPU_NO") // CPU_NO 컬럼

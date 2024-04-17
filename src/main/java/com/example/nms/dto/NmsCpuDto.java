@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class SystemInfoDto {
+public class NmsCpuDto {
     private Long cpuNo;
     private Date cpuDay;
     private double cpuCost;
