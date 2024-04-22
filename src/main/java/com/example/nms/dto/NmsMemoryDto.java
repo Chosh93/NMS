@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class NmsMemoryDto {
-    private Long cpuNo;
-    private Date cpuDay;
-    private double cpuCost;
+    private Long memoryNo;
+    private Date memoryDay;
+    private double memoryCost;
 }
