@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.*;
 
@@ -18,18 +19,22 @@ public class SystemInfoService {
     private final NmsCpuRepository nmsCpuRepository;
 
     public Map<String, Double> startMonitoring() {
-        Map<String, Double> systemInfo = new LinkedHashMap<>();
+        Map<String, Double> systemInfo = new HashMap<>();
 
         try {
             // CPU 정보 수집
             OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-            double cpuUsage = Double.parseDouble(String.format("%.2f", osBean.getSystemCpuLoad() * 1000));
+            double cpuUsage = Double.parseDouble(String.format("%.2f", osBean.getSystemCpuLoad() * 100 * Runtime.getRuntime().availableProcessors() / 2)); // 현재 pc 6코어, 12 논리 프로세스
             double memoryTotal = Double.parseDouble((String.format("%.2f", (double)osBean.getTotalMemorySize()/1024/1024/1024)));
             double memoryFree = Double.parseDouble((String.format("%.2f", (double)osBean.getFreeMemorySize()/1024/1024/1024)));
+            double diskTotal = (double) (new File("/").getTotalSpace()) / Math.pow(1024,3);
+            double diskUsable =  (double) (new File("/").getUsableSpace()) / Math.pow(1024,3);
 
             systemInfo.put("cpuUsage", cpuUsage);
             systemInfo.put("memoryTotal", memoryTotal);
-            systemInfo.put("memoryUsage", Double.parseDouble((String.format("%.2f", 100-(memoryFree/memoryTotal)*100))));
+            systemInfo.put("memoryFree", memoryFree);
+            systemInfo.put("diskTotal", diskTotal);
+            systemInfo.put("diskUsable", diskUsable);
 
             if (cpuUsage >= 80) {
                 NmsCpu nmsCpu = new NmsCpu();
