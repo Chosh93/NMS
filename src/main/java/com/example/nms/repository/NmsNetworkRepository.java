@@ -1,9 +1,9 @@
 package com.example.nms.repository;
 
-import com.example.nms.entity.NmsCpu;
+import com.example.nms.entity.NmsNetwork;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NmsCpuRepository extends JpaRepository<NmsCpu, Long> {
+public interface NmsNetworkRepository extends JpaRepository<NmsNetwork, Long> {
 }

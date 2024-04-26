@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class NmsDisDto {
+public class NmsDiskDto {
     private Long diskNo;
     private Date diskDay;
     private double diskCost;
