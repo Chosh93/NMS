@@ -39,6 +39,10 @@ public class SystemInfoController {
         return systemIssue;
     }
 
-    // 각 이슈 관련 정보 리스트 반환
-
+    // cpu 정보
+    @GetMapping("/cpu-info")
+    public Map<String, Object> cpuInfo(){
+        Map<String, Object> cpuInfoMap = systemInfoService.cpuInfo();
+        return cpuInfoMap;
+    }
 }

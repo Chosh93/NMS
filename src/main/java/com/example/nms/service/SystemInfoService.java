@@ -79,6 +79,17 @@ public class SystemInfoService {
         return issueCntList;
     }
 
+    // cpu 정보
+    public Map<String, Object> cpuInfo() {
+        Map<String, Object> cpuInfoMap = new HashMap<>();
+        String cpuModel = System.getenv("PROCESSOR_IDENTIFIER");
+        int cpuCores = Runtime.getRuntime().availableProcessors();
+        cpuInfoMap.put("cpuModel", cpuModel);
+        cpuInfoMap.put("cpuCores", cpuCores);
+
+        return cpuInfoMap;
+    }
+
     // cpu 사용량
     private void collectCPUInfo(Map<String, Object> systemInfo) {
         OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
