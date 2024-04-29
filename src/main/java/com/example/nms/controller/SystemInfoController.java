@@ -24,16 +24,21 @@ public class SystemInfoController {
 
     private final SystemInfoService systemInfoService;
 
+    // cpu, memory, disk, network 사용량 조회
     @GetMapping("/start-monitoring")
-    public ResponseEntity<Map<String, Double>> startMonitoring() {
-        Map<String, Double> systemInfo = systemInfoService.startMonitoring();
+    public ResponseEntity<Map<String, Object>> startMonitoring() {
+        Map<String, Object> systemInfo = systemInfoService.startMonitoring();
         System.out.println(systemInfo);
         return ResponseEntity.ok(systemInfo);
     }
 
+    // 각 issue count map으로 반환
     @GetMapping("/system-issue")
     public Map<String, Long> systemIssue() {
         Map<String, Long> systemIssue = systemInfoService.issueCount();
         return systemIssue;
     }
+
+    // 각 이슈 관련 정보 리스트 반환
+
 }
